@@ -1,0 +1,22 @@
+<h2>Poista kategoria</h2>
+
+<form action="/remove_cat" method="POST">
+
+<p>Minkä kategorian haluat poistaa?</p>
+
+{% for category in list %}
+
+<input type="radio" name="category" value="{{ category.id }}"> {{ category.name}} <br>
+
+{% endfor %}
+
+<p>
+
+<input type="submit" value="Poista">
+
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token}}">
+
+</form>
+
+<p>
+<a href="/">Palaa takaisin etusivulle</a>

@@ -1,0 +1,7 @@
+<form action="/new_cat" method="POST">
+Kategorian nimi: <input type="text" name="name"> <br>
+<input type="submit" value="Tallenna kategoria">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token}}">
+</form>
+<p>
+<a href="/">Palaa etusivulle</a>

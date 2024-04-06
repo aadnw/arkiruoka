@@ -1,0 +1,19 @@
+<h2>Poista resepti</h2>
+
+<form action="/remove" method="POST">
+
+<p>Minkä reseptin haluat poistaa?</p>
+
+{% for recipe in list %}
+<input type="radio" name="recipe" value="{{ recipe.id }}"> {{ recipe.name }} <br>
+{% endfor %}
+
+<p>
+
+<input type="submit" value="Poista resepti">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+
+</form>
+
+<p>
+<a href="/">Palaa takaisin etusivulle</a>

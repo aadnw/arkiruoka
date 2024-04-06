@@ -1,0 +1,56 @@
+<h2>{{ name }}</h2>
+<p>
+Reseptin takana: {{ creator }} <br>
+Valmistusaika: {{ time }} <br>
+<p>
+Ainesosat: <br>
+{{ ingredients }}
+<p>
+Valmistusohjeet: <br>
+{{ instructions }}
+<p>
+
+<hr>
+
+{% if session.user_id == 1 %}
+<form action="/add_favorite" method="POST">
+<input type="checkbox" name="favorite" value="1"> <input type="submit" value="Lisää suosikiksi">
+<input type="hidden" name="recipe_id" value="{{ id }}">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+</form>
+{% endif %}
+
+
+{% if reviews %}
+<h3>Arvostelut ja kommentit:</h3>
+{% endif %}
+
+<ul>
+{% for review in reviews %}
+<li> {{ review[0] }} ({{ review[1] }}/5): "{{ review[2] }}"
+{% endfor %}
+</ul>
+
+{% if session.user_id %}
+<h3>Jätä kommentti</h3>
+<form action="/review" method="POST">
+Tähdet:
+<select name="stars">
+<option value="1">1
+<option value="2">2
+<option value="3">3
+<option value="4">4
+<option value="5">5
+</select>
+<p>
+Kommentti: <br>
+<textarea name="comment" rows="3" cols="40" maxlength="1000"></textarea>
+<p>
+<input type="submit" value="Lähetä">
+<input type="hidden" name="recipe_id" value="{{ id }}">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+</form>
+{% endif %}
+
+<p>
+<a href="/">Palaa takaisin etusivulle</a>

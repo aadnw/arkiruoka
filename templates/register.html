@@ -1,0 +1,23 @@
+<h2>Rekisteröidy Arkikarkeloiden käyttäjäksi</h2>
+
+<form action="/register" method="POST">
+Käyttäjätunnus: <br><input type="text" name="username" minlength="1" maxlength="20">
+<p>
+Salasana: <br><input type="password" name="password1" minlength="7" maxlength="20">
+<p>
+Salasana uudestaan: <br><input type="password" name="password2">
+<p>
+Käyttäjärooli:
+<select name="role">
+<option value=1> käyttäjä
+<option value=2> ylläpitäjä
+</select>
+<p>
+<input type="submit" value="Luo käyttäjätunnus">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token}}">
+</form>
+
+<p>
+<a href="/login">Palaa takaisin kirjautumissivulle</a>
+<p>
+<a href="/">Palaa takaisin etusivulle</a> 

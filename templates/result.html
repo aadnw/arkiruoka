@@ -1,0 +1,13 @@
+<h3>Hakutulokset:</h3>
+<br>
+{% if not results %}
+Hakusanallasi ei löytynyt tuloksia.
+{% endif %}
+
+{% for result in results %}
+<a href="/result/{{ result.id }}">{{ result.name }}</a> <br>
+{% endfor %}
+
+<br>
+
+<a href="/">Palaa takaisin etusivulle</a>

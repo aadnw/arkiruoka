@@ -1,0 +1,15 @@
+<h2>Suosikit</h2>
+
+<ul>
+{% for favorite in favorites %}
+<li><a href="/favorite/{{ favorite.id }}">{{ favorite.name }}</a>
+{% endfor %}
+</ul>
+
+<p>
+
+<a href="/remove_fav">Poista suosikki</a>
+
+<p>
+
+<a href="/">Palaa takaisin etusivulle</a>

@@ -1,0 +1,17 @@
+<h2>Lisää uusi resepti</h2>
+
+<form action="/create" method="POST">
+Resepti: <input type="text" name="name"> <br>
+Valmistusaika (min): <input type="number" name="time"> <br>
+Ainekset: <br>
+<textarea name="ingredients" rows="15" cols="30">
+</textarea> <br>
+Valmistusohje: <br>
+<textarea name="instructions" rows="20" cols="40">
+</textarea> <br>
+<input type="submit" value="Tallenna resepti Arkikarkeloihin">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+</form>
+<p>
+<a href="/">Palaa etusivulle</a>
+

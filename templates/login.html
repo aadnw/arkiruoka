@@ -1,0 +1,16 @@
+<h2>Kirjaudu sisään</h2>
+
+<form action="/login" method="POST">
+Käyttäjänimi: <input type="text" name="username">
+<p>
+Salasana: <input type="password" name="password">
+<p>
+<input type="submit" value="Kirjaudu sisään">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token}}">
+</form>
+
+Jos sinulla ei ole käyttäjätunnusta, voit luoda uuden tunnuksen <a href="/register">tästä</a>
+
+<p>
+<a href="/">Palaa takaisin etusivulle</a>
+
