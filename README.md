@@ -3,21 +3,12 @@ Sovelluksessa näkyy erilaisia ruokakategorioita kuten kasvisruuat, vegaaniset, 
 
 Sovelluksen ominaisuuksia:
 * Käyttäjä voi kirjautua sisään ja ulos sekä luoda uuden tunnuksen.
-<<<<<<< Updated upstream
 * Käyttäjä näkee sovelluksen etusivulla listan kategorioista.
 * Käyttäjä voi luoda kategoriaan uuden reseptin antamalla reseptille nimen ja kirjoittamalla ainekset, ohjeen sekä valmistusajan.
-=======
-* Käyttäjä näkee sovelluksen etusivulla listan kategorioista
-* Käyttäjä voi luoda kategoriaan uuden reseptin antamalla reseptille nimen ja kirjoittamalla ainekset, ohjeen sekä valmistusajan.
 * Käyttäjä voi poistaa luomansa reseptin.
->>>>>>> Stashed changes
 * Käyttäjä voi antaa arvion (tähdet ja kommentti) reseptistä ja lukea muiden antamia arvioita.
 * Käyttäjä voi lisätä reseptejä omiin suosikkeihin.
 * Käyttäjä voi etsiä sivustolta reseptejä, joiden osana on annettu sana, esim. “munakoiso”.
-<<<<<<< Updated upstream
-=======
-* Käyttäjä voi lisätä reseptejä omiin suosikkeihin
->>>>>>> Stashed changes
 * Ylläpitäjä voi lisätä ja poistaa kategorioita.
 
 # Käynnistysohjeet:
