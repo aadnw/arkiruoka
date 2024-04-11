@@ -29,7 +29,6 @@ def new_recipe():
     recipe_id = recipes.new_recipe(name, time, ingredients, instructions, users.user_id())
     return redirect("/recipe/"+str(recipe_id))
     
-    
 @app.route("/remove", methods=["GET", "POST"])
 def remove_recipe():
     if request.method == "GET":
@@ -61,10 +60,11 @@ def remove_recipe():
 def show_recipe(recipe_id):
     info = recipes.get_recipe_info(recipe_id)
     reviews = recipes.get_reviews(recipe_id)
+    check_favorites = recipes.check_favorites(recipe_id)
 
     return render_template("recipe.html", id=recipe_id, name=info[0],
                            creator=info[1], time=info[2], ingredients=info[3].replace('<br>', '').replace('<br/>', ''), 
-                           instructions=info[4].replace('<br>', '').replace('<br/>', ''), reviews=reviews)
+                           instructions=info[4].replace('<br>', '').replace('<br/>', ''), reviews=reviews, check_favorites=check_favorites)
 
 @app.route("/new_cat", methods=["GET", "POST"])
 def new_category():
@@ -140,9 +140,17 @@ def add_fav():
     users.check_csrf()
     
     recipe_id = request.form["recipe_id"]
-    if "favorite" in request.form:
-        favorite_id = recipes.add_favorite(recipe_id, users.user_id())
-        return redirect("/recipe/"+str(recipe_id))
+    favorite_id = recipes.add_favorite(recipe_id, users.user_id())
+    return redirect("/recipe/"+str(recipe_id))
+
+@app.route("/remove_fav", methods=["POST"])
+def remove_favorite():
+    users.check_csrf()
+
+    recipe_id = request.form["recipe_id"]
+    recipes.remove_favorite(recipe_id, users.user_id())
+
+    return redirect("/recipe/"+str(recipe_id))
 
 @app.route("/favorites/<user_id>")
 def favorite(user_id):

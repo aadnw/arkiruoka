@@ -26,7 +26,8 @@ CREATE TABLE recipes (
 CREATE TABLE favorites (
     id SERIAL PRIMARY KEY,
     user_id INTEGER REFERENCES users(id),
-    recipe_id INTEGER REFERENCES recipes(id)
+    recipe_id INTEGER REFERENCES recipes(id),
+    visible INTEGER
 );
 
 CREATE TABLE reviews (

@@ -1,4 +1,4 @@
-<h2>Suosikit</h2>
+<h2>Suosikit &#128152;</h2>
 
 {% if not favorites %}
 Sinulla ei ole vielä suosikkeja.
@@ -6,13 +6,9 @@ Sinulla ei ole vielä suosikkeja.
 
 <ul>
 {% for favorite in favorites %}
-<li><a href="/favorite/{{ favorite.id }}">{{ favorite.name }}</a>
+<li><a href="/recipe/{{ favorite.id }}">{{ favorite.name }}</a>
 {% endfor %}
 </ul>
-
-<p>
-
-<a href="/remove_fav">Poista suosikki</a>
 
 <p>
 

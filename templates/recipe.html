@@ -16,14 +16,26 @@
 
 <hr>
 
-{% if session.user_id == 1 %}
+{% if session.user_role == 1 and check_favorites == 0 %}
 <form action="/add_favorite" method="POST">
-<input type="checkbox" name="favorite" value="1"> <input type="submit" value="Lisää suosikiksi">
+Lisää suosikiksi <input type="submit" value=&#128152;>
 <input type="hidden" name="recipe_id" value="{{ id }}">
 <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
 {% endif %}
 
+<p>
+
+{% if session.user_role == 1 and check_favorites == 1 %}
+Olet lisännyt reseptin suosikkeihin!
+<form action="/remove_fav" method="POST">
+Poista suosikeista <input type="submit" value=&#128148;>
+<input type="hidden" name="recipe_id" value="{{ id }}">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+</form>
+{% endif %}
+
+<p>
 
 {% if reviews %}
 <h3>Arvostelut ja kommentit:</h3>

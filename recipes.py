@@ -85,14 +85,24 @@ def result(query):
     return db.session.execute(text(sql), {"query":"%"+query+"%"}).fetchall()
 
 def add_favorite(recipe_id, user_id):
-    sql = """INSERT INTO favorites (recipe_id, user_id)
-           VALUES (:recipe_id, :user_id)"""
+    sql = """INSERT INTO favorites (recipe_id, user_id, visible)
+           VALUES (:recipe_id, :user_id, 1)"""
     favorite_id = db.session.execute(text(sql), {"recipe_id":recipe_id, "user_id":user_id})
     db.session.commit()
     return favorite_id 
 
+def remove_favorite(recipe_id, user_id):
+    sql = """UPDATE favorites SET visible=0 
+            WHERE recipe_id=:recipe_id AND user_id=:user_id"""
+    db.session.execute(text(sql), {"recipe_id":recipe_id, "user_id":user_id})
+    db.session.commit()
+
 def favorites(user_id):
-    sql = """SELECT R.id, R.name, U.id FROM recipes R, favorites F, users U
-            WHERE R.id = F.recipe_id AND F.user_id=U.id AND U.id=:user_id AND visible=1
+    sql = """SELECT R.id, R.name FROM recipes R, favorites F, users U
+            WHERE R.id=F.recipe_id AND F.user_id=U.id AND U.id=:user_id AND F.visible=1
             ORDER BY R.name"""
     return db.session.execute(text(sql), {"user_id":user_id}).fetchall()
+
+def check_favorites(recipe_id):
+    sql = "SELECT EXISTS(SELECT * FROM favorites WHERE recipe_id=:recipe_id AND visible=1)"
+    return db.session.execute(text(sql), {"recipe_id":recipe_id}).fetchone()[0]
