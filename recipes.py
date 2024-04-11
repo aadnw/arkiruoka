@@ -46,7 +46,7 @@ def get_categories():
 
 def get_category_recipes(category_id):
     sql = """SELECT id, name FROM recipes
-            WHERE id=:category_id"""
+            WHERE id=:category_id AND visible=1"""
     return db.session.execute(text(sql), {"category_id":category_id}).fetchall()
 
 def get_category_id(category_name):
@@ -81,7 +81,7 @@ def get_reviews(recipe_id):
     return db.session.execute(text(sql), {"recipe_id":recipe_id}).fetchall()
 
 def result(query):
-    sql = "SELECT id, name FROM recipes WHERE name LIKE :query OR ingredients LIKE :query OR instructions LIKE :query"
+    sql = "SELECT id, name FROM recipes WHERE name LIKE :query OR ingredients LIKE :query OR instructions LIKE :query AND visible=1"
     return db.session.execute(text(sql), {"query":"%"+query+"%"}).fetchall()
 
 def add_favorite(recipe_id, user_id):

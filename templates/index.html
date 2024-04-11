@@ -20,7 +20,7 @@ Et ole kirjautunut sisään. <a href="/login">Kirjaudu sisään</a>
 </ul>
 
 <p>
-{% if session.user_id == 1%}
+{% if session.user_role == 1%}
 <a href="/favorites/{{ session.user_id }}"><h3>Suosikit</h3></a>
 {% endif %}
 <p>

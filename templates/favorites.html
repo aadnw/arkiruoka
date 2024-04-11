@@ -1,5 +1,9 @@
 <h2>Suosikit</h2>
 
+{% if not favorites %}
+Sinulla ei ole vielä suosikkeja.
+{% endif %}
+
 <ul>
 {% for favorite in favorites %}
 <li><a href="/favorite/{{ favorite.id }}">{{ favorite.name }}</a>

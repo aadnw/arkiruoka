@@ -23,7 +23,7 @@ def new_recipe():
     if len(name) > 50:
         return render_template("error.html", message="Nimi on liian pitkä")
     time = request.form["time"]
-    ingredients = request.form["ingredients"]
+    ingredients = request.form["ingredients"].replace('\n', '<br>')
     instructions = request.form["instructions"]
 
     recipe_id = recipes.new_recipe(name, time, ingredients, instructions, users.user_id())
@@ -34,9 +34,11 @@ def new_recipe():
 def remove_recipe():
     if request.method == "GET":
         if users.user_id() == 1:
+            users.require_role(1)
             my_recipes = recipes.get_my_recipes(users.user_id())
             return render_template("remove.html", list=my_recipes)
         if users.user_id() == 2:
+            users.require_role(2)
             all_recipes = recipes.get_all_recipes()
             return render_template("remove.html", list=all_recipes)
 
@@ -61,8 +63,8 @@ def show_recipe(recipe_id):
     reviews = recipes.get_reviews(recipe_id)
 
     return render_template("recipe.html", id=recipe_id, name=info[0],
-                           creator=info[1], time=info[2], ingredients=info[3], 
-                           instructions=info[4], reviews=reviews)
+                           creator=info[1], time=info[2], ingredients=info[3].replace('<br>', '').replace('<br/>', ''), 
+                           instructions=info[4].replace('<br>', '').replace('<br/>', ''), reviews=reviews)
 
 @app.route("/new_cat", methods=["GET", "POST"])
 def new_category():
