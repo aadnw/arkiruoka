@@ -1,13 +1,14 @@
 <h3>Hakutulokset:</h3>
-<br>
 {% if not results %}
 Hakusanallasi ei löytynyt tuloksia.
 {% endif %}
 
 {% for result in results %}
-<a href="/recipe/{{ result.id }}">{{ result.name }}</a> <br>
+<ul>
+<li> <a href="/recipe/{{ result.id }}">{{ result.name }}</a> <br>
+</ul>
 {% endfor %}
 
-<br>
+<p>
 
 <a href="/">Palaa takaisin etusivulle</a>
