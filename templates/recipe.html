@@ -1,13 +1,17 @@
 <h2>{{ name }}</h2>
 <p>
-Reseptin takana: {{ creator }} <br>
-Valmistusaika: {{ time }} <br>
+<b>Reseptin takana:</b> {{ creator }} <br>
+<b>Valmistusaika:</b> {{ time }} min <br>
 <p>
-Ainesosat: <br>
-{{ ingredients }}
+<b>Ainesosat:</b> <br>
+{% for line in ingredients.splitlines() %}
+    {{ line }} <br>
+{% endfor %}
 <p>
-Valmistusohjeet: <br>
-{{ instructions }}
+<b>Valmistusohjeet:</b> <br>
+{% for line in instructions.splitlines() %}
+    {{ line }} <br>
+{% endfor %}
 <p>
 
 <hr>
