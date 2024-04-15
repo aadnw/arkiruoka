@@ -10,6 +10,7 @@ Valmistusohje: <br>
 <textarea name="instructions" rows="20" cols="40">
 </textarea> <br>
 <input type="submit" value="Tallenna resepti Arkikarkeloihin">
+<input type="hidden" name="category_id" value="{{ c_id }}">
 <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
 <p>

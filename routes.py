@@ -6,14 +6,16 @@ import users
 @app.route("/")
 def index():
     list = recipes.get_categories()
-    return render_template("index.html", categories=list)
+    my_recipes = recipes.get_my_recipes(users.user_id())
+    return render_template("index.html", categories=list, my_recipes=my_recipes)
 
-@app.route("/new")
-def new():
-    return render_template("new.html")
+@app.route("/new/<int:category_id>")
+def new(category_id):
+    id = recipes.get_category_info(category_id)[1]
+    return render_template("new.html", c_id=id)
 
 @app.route("/create", methods=["POST"])
-def new_recipe():
+def create_recipe():
     users.require_role(1)
     users.check_csrf()
 
@@ -25,35 +27,40 @@ def new_recipe():
     time = request.form["time"]
     ingredients = request.form["ingredients"].replace('\n', '<br>')
     instructions = request.form["instructions"]
+    category_id = request.form["category_id"]
 
-    recipe_id = recipes.new_recipe(name, time, ingredients, instructions, users.user_id())
+    recipe_id = recipes.new_recipe(name, time, ingredients, instructions, users.user_id(), category_id)
     return redirect("/recipe/"+str(recipe_id))
     
 @app.route("/remove", methods=["GET", "POST"])
 def remove_recipe():
     if request.method == "GET":
-        if users.user_id() == 1:
-            users.require_role(1)
-            my_recipes = recipes.get_my_recipes(users.user_id())
-            return render_template("remove.html", list=my_recipes)
-        if users.user_id() == 2:
-            users.require_role(2)
-            all_recipes = recipes.get_all_recipes()
-            return render_template("remove.html", list=all_recipes)
-
+        users.require_role(1)
+        my_recipes = recipes.get_my_recipes(users.user_id())
+        return render_template("remove.html", list=my_recipes)
+    
     if request.method == "POST":
         users.check_csrf()
 
-        if "recipe" in request.form:
-            recipe = request.form["recipe"]
-            
-            if users.user_id() == 1:
-                recipe = request.form["recipe"]
-                recipes.remove_recipe(recipe, users.user_id())
-            if users.user_id() == 2:
-                recipe = request.form["recipe"]
-                recipes.remove_recipe_admin(recipe)
-        
+        recipe = request.form["recipe"]
+        recipes.remove_recipe(recipe, users.user_id())
+
+        return redirect("/")
+
+@app.route("/admin_remove", methods=["GET", "POST"])
+def admin_remove_recipe():
+    users.require_role(2)
+
+    if request.method == "GET":
+        list = recipes.get_all_recipes()
+        return render_template("admin_remove.html", list=list)
+    
+    if request.method == "POST":
+        users.check_csrf()
+
+        recipe = request.form["recipe"]
+        recipes.remove_recipe_admin(recipe)
+
         return redirect("/")
     
 @app.route("/recipe/<int:recipe_id>")
@@ -106,7 +113,7 @@ def remove_category():
 def show_category(category_id):
     info = recipes.get_category_info(category_id)
     category_recipes = recipes.get_category_recipes(category_id)
-    return render_template("category.html", name=info, recipes=category_recipes)
+    return render_template("category.html", name=info[0], id=info[1], recipes=category_recipes)
         
 @app.route("/review", methods=["POST"])
 def review():
@@ -131,8 +138,8 @@ def review():
 @app.route("/result")
 def result():
     query = request.args["query"]
-    query_id = recipes.result(query)
-    return render_template("result.html", results=query_id)
+    query = recipes.result(query)
+    return render_template("result.html", results=query)
 
 @app.route("/add_favorite", methods=["POST"])
 def add_fav():
@@ -145,6 +152,7 @@ def add_fav():
 
 @app.route("/remove_fav", methods=["POST"])
 def remove_favorite():
+    users.require_role(1)
     users.check_csrf()
 
     recipe_id = request.form["recipe_id"]

@@ -68,5 +68,17 @@ Kommentti: <br>
 </form>
 {% endif %}
 
+<hr>
+
+{% if session.user_id == creator_id %}
+<b>Hallinnoi luomaasi reseptiä<b> <br>
+<form action="/remove" method="POST">
+<input type="submit" value="Poista resepti">
+<input type="hidden" name="recipe_id" value="{{ id }}">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+</form>
+{% endif %}
+
 <p>
+
 <a href="/">Palaa takaisin etusivulle</a>

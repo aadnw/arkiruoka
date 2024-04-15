@@ -37,10 +37,11 @@ Et ole kirjautunut sisään. <a href="/login">Kirjaudu sisään</a>
 <ul>
 <li> <a href="/remove_cat">Poista kategoria</a>
 <li> <a href="/new_cat">Lisää uusi kategoria</a>
+<li> <a href="/admin_remove">Hallinnoi reseptejä</a>
 </ul>
 {% endif %}
 
-{% if session.user_role == 1 %}
+{% if session.user_role == 1 and my_recipes %}
 <h3>Hallinnoi omia reseptejä</h3>
 <ul>
 <li> <a href="/remove">Poista resepti</a> 

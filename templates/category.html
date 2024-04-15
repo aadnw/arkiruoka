@@ -4,21 +4,15 @@
 Kategoriassa ei ole vielä reseptejä.
 {% endif %}
 
+
 <ul>
 {% for recipe in recipes %}
 <li><a href="/recipe/{{ recipe.id }}">{{ recipe.name }}</a>
 {% endfor %}
 </ul>
 
-{% if session.user_role == 2 %}
-<h3>Ylläpitäjän toiminnot</h3>
-<ul>
-<li> <a href="/remove">Poista resepti</a>
-</ul>
-{% endif %}
-
 {% if session.user_role == 1 %}
-<a href="/new">Lisää uusi resepti</a>
+<a href="/new/{{ id }}">Lisää uusi resepti</a>
 {% endif %}
 <p>
 <a href="/">Palaa takaisin etusivulle</a>

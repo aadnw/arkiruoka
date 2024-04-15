@@ -12,21 +12,21 @@ def get_all_recipes():
     sql = "SELECT id, name FROM recipes WHERE visible=1 ORDER BY name"
     return db.session.execute(text(sql)).fetchall()
 
+def get_my_recipes(user_id):
+    sql = """SELECT id, name FROM recipes
+            WHERE visible=1 AND creator_id=:user_id ORDER BY name"""
+    return db.session.execute(text(sql), {"user_id":user_id}).fetchall()
+
 def get_recipe_info(recipe_id):
     sql = """SELECT R.name, U.username, R.time, R.ingredients, R.instructions
             FROM recipes R, users U WHERE
-            R.id=:recipe_id AND R.creator_id=U.id"""
+            R.id=:recipe_id AND R.creator_id=U.id AND R.visible=1"""
     return db.session.execute(text(sql), {"recipe_id":recipe_id}).fetchone()
 
-def get_my_recipes(user_id):
-    sql = """SELECT id, name FROM recipes
-            WHERE creator_id=:user_id AND visible=1 ORDER BY name"""
-    return db.session.execute(text(sql), {"user_id":user_id}).fetchall()
-
-def new_recipe(name, time, ingredients, instructions, creator_id):
-    sql = """INSERT INTO recipes (creator_id, name, time, ingredients, instructions, created_at, visible)
-            VALUES (:creator_id, :name, :time, :ingredients, :instructions, NOW(), 1) RETURNING id"""
-    recipe_id = db.session.execute(text(sql), {"creator_id":creator_id, "name":name, "time":time, "ingredients":ingredients, "instructions":instructions}).fetchone()[0]
+def new_recipe(name, time, ingredients, instructions, creator_id, category_id):
+    sql = """INSERT INTO recipes (creator_id, category_id, name, time, ingredients, instructions, created_at, visible)
+            VALUES (:creator_id, :category_id, :name, :time, :ingredients, :instructions, NOW(), 1) RETURNING id"""
+    recipe_id = db.session.execute(text(sql), {"creator_id":creator_id, "category_id":category_id, "name":name, "time":time, "ingredients":ingredients, "instructions":instructions}).fetchone()[0]
     db.session.commit()
     return recipe_id
 
@@ -46,16 +46,19 @@ def get_categories():
 
 def get_category_recipes(category_id):
     sql = """SELECT id, name FROM recipes
-            WHERE id=:category_id AND visible=1"""
+            WHERE category_id=:category_id AND visible=1"""
     return db.session.execute(text(sql), {"category_id":category_id}).fetchall()
 
 def get_category_id(category_name):
     sql = "SELECT id FROM categories WHERE category_name=:category_name"
-    return db.session.execute(text(sql), {"category_name":category_name}).fetchone()
+    id = db.session.execute(text(sql), {"category_name":category_name}).fetchone()[0]
+
+    session["category_id"] = id
+    return session.get("category_id")
 
 def get_category_info(category_id):
-    sql = "SELECT name, id FROM categories WHERE id=:category_id"
-    return db.session.execute(text(sql), {"category_id":category_id}).fetchone()[0]
+    sql = "SELECT name, id FROM categories WHERE id=:category_id AND visible=1"
+    return db.session.execute(text(sql), {"category_id":category_id}).fetchone()
 
 def new_category(name):
     sql = "INSERT INTO categories (name, visible) VALUES(:name, 1) RETURNING id"
@@ -81,7 +84,7 @@ def get_reviews(recipe_id):
     return db.session.execute(text(sql), {"recipe_id":recipe_id}).fetchall()
 
 def result(query):
-    sql = "SELECT id, name FROM recipes WHERE name LIKE :query OR ingredients LIKE :query OR instructions LIKE :query AND visible=1"
+    sql = "SELECT id, name FROM recipes WHERE visible=1 AND name LIKE :query OR visible=1 AND ingredients LIKE :query OR visible=1 AND instructions LIKE :query"
     return db.session.execute(text(sql), {"query":"%"+query+"%"}).fetchall()
 
 def add_favorite(recipe_id, user_id):
@@ -99,7 +102,7 @@ def remove_favorite(recipe_id, user_id):
 
 def favorites(user_id):
     sql = """SELECT R.id, R.name FROM recipes R, favorites F, users U
-            WHERE R.id=F.recipe_id AND F.user_id=U.id AND U.id=:user_id AND F.visible=1
+            WHERE R.id=F.recipe_id AND F.user_id=U.id AND U.id=:user_id AND R.visible=1 AND F.visible=1
             ORDER BY R.name"""
     return db.session.execute(text(sql), {"user_id":user_id}).fetchall()
 
