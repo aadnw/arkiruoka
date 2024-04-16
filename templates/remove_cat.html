@@ -1,3 +1,6 @@
+{% extends "layout.html" %}
+{% block content %}
+
 <h2>Poista kategoria</h2>
 
 <form action="/remove_cat" method="POST">
@@ -20,3 +23,5 @@
 
 <p>
 <a href="/">Palaa takaisin etusivulle</a>
+
+{% endblock %}

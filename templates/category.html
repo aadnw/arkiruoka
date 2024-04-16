@@ -1,3 +1,6 @@
+{% extends "layout.html" %}
+{% block content %}
+
 <h2>{{ name }}</h2>
 
 {% if not recipes %}
@@ -16,3 +19,5 @@ Kategoriassa ei ole vielä reseptejä.
 {% endif %}
 <p>
 <a href="/">Palaa takaisin etusivulle</a>
+
+{% endblock %}

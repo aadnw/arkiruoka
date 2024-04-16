@@ -1,3 +1,6 @@
+{% extends "layout.html" %}
+{% block content %}
+
 <form action="/new_cat" method="POST">
 Kategorian nimi: <input type="text" name="name"> <br>
 <input type="submit" value="Tallenna kategoria">
@@ -5,3 +8,5 @@ Kategorian nimi: <input type="text" name="name"> <br>
 </form>
 <p>
 <a href="/">Palaa etusivulle</a>
+
+{% endblock %}

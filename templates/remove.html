@@ -1,3 +1,6 @@
+{% extends "layout.html" %}
+{% block content %}
+
 <h2>Poista resepti</h2>
 
 <form action="/remove" method="POST">
@@ -17,3 +20,5 @@
 
 <p>
 <a href="/">Palaa takaisin etusivulle</a>
+
+{% endblock %}

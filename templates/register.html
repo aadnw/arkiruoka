@@ -1,3 +1,6 @@
+{% extends "layout.html" %}
+{% block content %}
+
 <h2>Rekisteröidy Arkikarkeloiden käyttäjäksi</h2>
 
 <form action="/register" method="POST">
@@ -21,3 +24,5 @@ Käyttäjärooli:
 <a href="/login">Palaa takaisin kirjautumissivulle</a>
 <p>
 <a href="/">Palaa takaisin etusivulle</a> 
+
+{% endblock %}
