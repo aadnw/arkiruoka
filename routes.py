@@ -38,18 +38,20 @@ def remove_recipe():
         users.require_role(1)
         my_recipes = recipes.get_my_recipes(users.user_id())
         return render_template("remove.html", list=my_recipes)
-    
+
     if request.method == "POST":
         users.check_csrf()
 
         recipe = request.form["recipe"]
         recipes.remove_recipe(recipe, users.user_id())
 
-        return redirect("/")
+        return redirect("/profile/"+str(users.user_id()))
+
 
 @app.route("/admin_remove", methods=["GET", "POST"])
 def admin_remove_recipe():
     users.require_role(2)
+    users.check_csrf()
 
     if request.method == "GET":
         list = recipes.get_all_recipes()
@@ -140,6 +142,12 @@ def result():
     query = request.args["query"]
     query = recipes.result(query)
     return render_template("result.html", results=query)
+
+@app.route("/profile/<user_id>")
+def show_profile(user_id):
+    my_recipes = recipes.get_my_recipes(user_id)
+    return render_template("profile.html", recipes=my_recipes)
+
 
 @app.route("/add_favorite", methods=["POST"])
 def add_fav():

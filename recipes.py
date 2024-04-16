@@ -13,7 +13,7 @@ def get_all_recipes():
     return db.session.execute(text(sql)).fetchall()
 
 def get_my_recipes(user_id):
-    sql = """SELECT id, name FROM recipes
+    sql = """SELECT id, name, created_at FROM recipes
             WHERE visible=1 AND creator_id=:user_id ORDER BY name"""
     return db.session.execute(text(sql), {"user_id":user_id}).fetchall()
 
@@ -36,7 +36,7 @@ def remove_recipe(recipe_id, user_id):
     db.session.commit()
 
 def remove_recipe_admin(recipe_id):
-    sql = "UPDATE recipes SET visible=0 WHERE id=:id"
+    sql = "UPDATE recipes SET visible=0 WHERE id=:recipe_id"
     db.session.execute(text(sql), {"id":recipe_id})
     db.session.commit()
 

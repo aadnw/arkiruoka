@@ -3,8 +3,11 @@
 <p>
 <h2>Etusivu</h2>
 
-{% if session.user_id %}
-Olet kirjautunut sisään nimellä <b>{{ session.user_name }}</b>. <a href="/logout">Kirjaudu ulos</a>
+{% if session.user_id and session.user_role == 1 %}
+Ihanaa nähdä sinua taas! Mukavia kokkaushetkiä <b>{{ session.user_name }}</b> &#129392; <br>
+<a href="/profile/{{ session.user_id }}"><h3>Oma profiili</h3></a>
+{% elif session.user_id and session.user_role == 2 %}
+Tervetuloa ylläpitäjä, <b>{{ session.user_name }}.</b>
 {% else %}
 Et ole kirjautunut sisään. <a href="/login">Kirjaudu sisään</a>
 {% endif %}
@@ -19,10 +22,6 @@ Et ole kirjautunut sisään. <a href="/login">Kirjaudu sisään</a>
 {% endfor %}
 </ul>
 
-<p>
-{% if session.user_role == 1%}
-<a href="/favorites/{{ session.user_id }}"><h3>Suosikit</h3></a>
-{% endif %}
 <p>
 
 <form action="/result" method="GET">
@@ -41,9 +40,6 @@ Et ole kirjautunut sisään. <a href="/login">Kirjaudu sisään</a>
 </ul>
 {% endif %}
 
-{% if session.user_role == 1 and my_recipes %}
-<h3>Hallinnoi omia reseptejä</h3>
-<ul>
-<li> <a href="/remove">Poista resepti</a> 
-</ul>
+{% if session.user_id %}
+<a href="/logout">Kirjaudu ulos</a>
 {% endif %}
