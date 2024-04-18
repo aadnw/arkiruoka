@@ -36,7 +36,7 @@ def remove_recipe(recipe_id, user_id):
     db.session.commit()
 
 def remove_recipe_admin(recipe_id):
-    sql = "UPDATE recipes SET visible=0 WHERE id=:recipe_id"
+    sql = "UPDATE recipes SET visible=0 WHERE id=:id"
     db.session.execute(text(sql), {"id":recipe_id})
     db.session.commit()
 

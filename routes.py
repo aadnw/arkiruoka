@@ -51,11 +51,10 @@ def remove_recipe():
 @app.route("/admin_remove", methods=["GET", "POST"])
 def admin_remove_recipe():
     users.require_role(2)
-    users.check_csrf()
 
     if request.method == "GET":
-        list = recipes.get_all_recipes()
-        return render_template("admin_remove.html", list=list)
+        removable = recipes.get_all_recipes()
+        return render_template("admin_remove.html", list=removable)
     
     if request.method == "POST":
         users.check_csrf()
