@@ -6,8 +6,8 @@ import users
 @app.route("/")
 def index():
     list = recipes.get_categories()
-    my_recipes = recipes.get_my_recipes(users.user_id())
-    return render_template("index.html", categories=list, my_recipes=my_recipes)
+    top_recipes = recipes.get_top_recipes()
+    return render_template("index.html", categories=list, tops=top_recipes)
 
 @app.route("/new/<int:category_id>")
 def new(category_id):
@@ -198,7 +198,7 @@ def register():
     
     if request.method == "POST":
         username = request.form["username"]
-        if len(username) < 1 or len(username) > 20:
+        if len(username) < 5 or len(username) > 20:
             return render_template("error.html", message="Käyttäjätunnuksessa tulee olle 1-20 merkkiä")
         
         password1 = request.form["password1"]

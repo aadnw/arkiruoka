@@ -49,13 +49,6 @@ def get_category_recipes(category_id):
             WHERE category_id=:category_id AND visible=1"""
     return db.session.execute(text(sql), {"category_id":category_id}).fetchall()
 
-def get_category_id(category_name):
-    sql = "SELECT id FROM categories WHERE category_name=:category_name"
-    id = db.session.execute(text(sql), {"category_name":category_name}).fetchone()[0]
-
-    session["category_id"] = id
-    return session.get("category_id")
-
 def get_category_info(category_id):
     sql = "SELECT name, id FROM categories WHERE id=:category_id AND visible=1"
     return db.session.execute(text(sql), {"category_id":category_id}).fetchone()
@@ -109,3 +102,12 @@ def favorites(user_id):
 def check_favorites(recipe_id):
     sql = "SELECT EXISTS(SELECT * FROM favorites WHERE recipe_id=:recipe_id AND visible=1)"
     return db.session.execute(text(sql), {"recipe_id":recipe_id}).fetchone()[0]
+
+def get_top_recipes():
+    sql = """SELECT R.name, R.id, W.recipe_id, AVG(W.stars) FROM recipes R, reviews W
+            WHERE R.id=W.recipe_id
+            GROUP BY W.recipe_id, R.name, R.id
+            ORDER BY AVG(W.stars) DESC LIMIT 3"""
+    return db.session.execute(text(sql)).fetchall()
+
+

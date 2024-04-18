@@ -26,6 +26,14 @@ Et ole kirjautunut sisään. <a href="/login">Kirjaudu sisään</a>
 
 <p>
 
+<h3>Top 3 reseptit:</h3>
+
+<ol>
+{% for top in tops %}
+<li><a href="/recipe/{{ top.recipe_id }}">{{ top.name }}</a>
+{% endfor %}
+</ol>
+
 <form action="/result" method="GET">
 <h3>Hae reseptiä:</h3> <input type="text" name="query">
 <br>
