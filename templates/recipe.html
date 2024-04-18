@@ -17,9 +17,9 @@
 {% endfor %}
 <p>
 
-<hr>
+<hr> 
 
-{% if session.user_role == 1 and check_favorites == 0 %}
+{% if session.user_role == 1 and check_favorites == 0 and session.user_id != creator_id %}
 <form action="/add_favorite" method="POST">
 Lisää suosikiksi <input type="submit" value=&#128152;>
 <input type="hidden" name="recipe_id" value="{{ id }}">
@@ -27,11 +27,18 @@ Lisää suosikiksi <input type="submit" value=&#128152;>
 </form>
 {% endif %}
 
-<p>
+{% if session.user_role == 1 and check_favorites == 1 and visible == 0 and session.user_id != creator_id %}
+<form action="/favorite" method="POST">
+Lisää suosikiksi <input type="submit" value=&#128152;>
+<input type="hidden" name="recipe_id" value="{{ id }}">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+</form>
+{% endif %}
 
-{% if session.user_role == 1 and check_favorites == 1 %}
+{% if session.user_role == 1 and check_favorites == 1 and visible == 1 and session.user_id != creator_id %}
 Olet lisännyt reseptin suosikkeihin!
 <form action="/remove_fav" method="POST">
+<br>
 Poista suosikeista <input type="submit" value=&#128148;>
 <input type="hidden" name="recipe_id" value="{{ id }}">
 <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
@@ -50,7 +57,7 @@ Poista suosikeista <input type="submit" value=&#128148;>
 {% endfor %}
 </ul>
 
-{% if session.user_id %}
+{% if session.user_id and session.user_id != creator_id %}
 <h3>Jätä kommentti</h3>
 <form action="/review" method="POST">
 Tähdet:
@@ -69,9 +76,8 @@ Kommentti: <br>
 <input type="hidden" name="recipe_id" value="{{ id }}">
 <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
-{% endif %}
-
 <hr>
+{% endif %}
 
 <a href="/">Palaa takaisin etusivulle</a>
 
