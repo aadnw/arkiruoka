@@ -37,3 +37,7 @@ CREATE TABLE reviews (
     stars INTEGER,
     comment TEXT
 );
+
+INSERT INTO categories (name, visible) VALUES ('Kasvisruoat', 1);
+INSERT INTO categories (name, visible) VALUES ('Vegaaniset ruoat', 1);
+INSERT INTO categories (name, visible) VALUES ('Alle 30 min valmistusaika', 1);

@@ -59,8 +59,12 @@ def new_category(name):
     db.session.commit()
     return category_id
 
+def categories_for_removal():
+    sql = "SELECT id, name FROM categories WHERE visible=1 AND id!=1 AND id!=2 AND id!=3 ORDER BY name"
+    return db.session.execute(text(sql)).fetchall()
+
 def remove_category(category_id):
-    sql = "UPDATE categories SET visible=0 WHERE id=:id"
+    sql = "UPDATE categories SET visible=0 WHERE id=:id AND id!=1 AND id!=2 AND id!=3"
     db.session.execute(text(sql), {"id":category_id})
     db.session.commit()
 

@@ -99,7 +99,7 @@ def remove_category():
     users.require_role(2)
 
     if request.method == "GET":
-        categories = recipes.get_categories()
+        categories = recipes.categories_for_removal()
         return render_template("remove_cat.html", list=categories)
     
     if request.method == "POST":
