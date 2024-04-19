@@ -2,12 +2,6 @@ from sqlalchemy.sql import text
 from db import db
 from flask import session
 
-def get_recipe():
-    sql = """SELECT R.name, C.name FROM recipes R, categories C
-            WHERE R.id=C.id ORDER BY R.id"""
-    result = db.session.execute(text(sql))
-    return result.fetchall()
-
 def get_all_recipes():
     sql = "SELECT id, name FROM recipes WHERE visible=1 ORDER BY name"
     return db.session.execute(text(sql)).fetchall()
