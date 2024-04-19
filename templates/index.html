@@ -26,6 +26,7 @@ Et ole kirjautunut sisään. <a href="/login">Kirjaudu sisään</a>
 
 <p>
 
+{% if tops %}
 <h3>Top 3 reseptit:</h3>
 
 <ol>
@@ -33,6 +34,7 @@ Et ole kirjautunut sisään. <a href="/login">Kirjaudu sisään</a>
 <li><a href="/recipe/{{ top.recipe_id }}">{{ top.name }}</a>
 {% endfor %}
 </ol>
+{% endif %}
 
 <form action="/result" method="GET">
 <h3>Hae reseptiä:</h3> <input type="text" name="query">
