@@ -19,16 +19,26 @@ def create_recipe():
     users.require_role(1)
     users.check_csrf()
 
-    name = request.form["name"]
-    if len(name) < 1:
-        return render_template("error.html", message="Nimi ei ole tarpeeksi kuvaava")
-    if len(name) > 50:
-        return render_template("error.html", message="Nimi on liian pitkä")
-    time = request.form["time"]
-    ingredients = request.form["ingredients"].replace('\n', '<br>')
-    instructions = request.form["instructions"]
     category_id = request.form["category_id"]
 
+    name = request.form["name"]
+    if len(name) < 1:
+        return render_template("error.html", message="Nimi ei ole tarpeeksi kuvaava", adress="/new/"+str(category_id))
+    if len(name) > 50:
+        return render_template("error.html", message="Nimi on liian pitkä", adress="/new"+str(category_id))
+    
+    time = request.form["time"]
+    if time < 1:
+        return render_template("error.html", message="Et asettanut reseptille valmistusaikaa", adress="/new"+str(category_id))
+
+    ingredients = request.form["ingredients"].replace('\n', '<br>')
+    if ingredients == "":
+        return render_template("error.html", message="Ainesosien tekstikenttä on tyhjä", adress="/new/"+str(category_id))
+    
+    instructions = request.form["instructions"]
+    if instructions == "":
+        return render_template("error.html", message="Valmistusohjeiden tekstikenttä on tyhjä", adress="/new/"+str(category_id))
+    
     recipe_id = recipes.new_recipe(name, time, ingredients, instructions, users.user_id(), category_id)
     return redirect("/recipe/"+str(recipe_id))
     
@@ -86,10 +96,10 @@ def new_category():
         users.check_csrf()
 
         name = request.form["name"]
-        if len(name) < 1:
-            return render_template("error.html", message="Nimi ei ole tarpeeksi kuvaava")
+        if len(name) < 4:
+            return render_template("error.html", message="Nimi ei ole tarpeeksi kuvaava", adress="/new_cat")
         if len(name) > 50:
-            return render_template("error.html", message="Nimi on liian pitkä")
+            return render_template("error.html", message="Nimi on liian pitkä", adress="/new_cat")
 
         category_id = recipes.new_category(name)
         return redirect("/")
@@ -126,11 +136,11 @@ def review():
 
     stars = int(request.form["stars"])
     if stars < 1 or stars > 5:
-        return render_template("error.html", message="Virheellinen määrä tähtiä")
+        return render_template("error.html", message="Virheellinen määrä tähtiä", adress="/review")
     
     comment = request.form["comment"]
     if len(comment) > 1000:
-        return render_template("error.html", message="Kommentti on liian pitkä")
+        return render_template("error.html", message="Kommentti on liian pitkä", adress="/review")
     if comment == "":
         comment = "-"
     
@@ -192,7 +202,7 @@ def login():
         password = request.form["password"]
 
         if not users.login(username, password):
-            return render_template("error.html", message="Annoit väärän tunnuksen tai salasanan")
+            return render_template("error.html", message="Annoit väärän tunnuksen tai salasanan", adress="/login")
         return redirect("/")
     
 @app.route("/logout")
@@ -208,22 +218,22 @@ def register():
     if request.method == "POST":
         username = request.form["username"]
         if len(username) < 5 or len(username) > 20:
-            return render_template("error.html", message="Käyttäjätunnuksessa tulee olle 1-20 merkkiä")
+            return render_template("error.html", message="Käyttäjätunnuksessa tulee olle 1-20 merkkiä", adress="/register")
         
         password1 = request.form["password1"]
         password2 = request.form["password2"]
         if password1 != password2:
-            return render_template("error.html", message="Salasanat eivät täsmää")
+            return render_template("error.html", message="Salasanat eivät täsmää", adress="/register")
         if password1 == "":
-            return render_template("error.html", message="Salasana on tyhjä")
+            return render_template("error.html", message="Salasana on tyhjä", adress="/register")
         if len(password1) < 7 or len(password1) > 20:
-            return render_template("error.html", message="Salasanan tulee olla 7-20 merkkiä")
+            return render_template("error.html", message="Salasanan tulee olla 7-20 merkkiä", adress="/register")
         
         role = request.form["role"]
         if role not in ("1", "2"):
-            return render_template("error.html", message="Tuntematon käyttäjärooli")
+            return render_template("error.html", message="Tuntematon käyttäjärooli", adress="/register")
         
         if not users.register(username, password1, role):
-            return render_template("error.html", message="Rekisteröinti ei onnistunut")
+            return render_template("error.html", message="Rekisteröinti ei onnistunut", adress="/register")
         return redirect("/")
     
