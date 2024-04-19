@@ -13,15 +13,13 @@ Ihanaa nähdä sinua taas! Mukavia kokkaushetkiä <b>{{ session.user_name }}</b>
     <a href="/remove">Poista resepti</a>
 </nav>
 
-<hr>
-
 {% elif session.user_id and session.user_role == 2 %}
 Tervetuloa ylläpitäjä, <b>{{ session.user_name }}.</b>
 {% else %}
-Et ole kirjautunut sisään. <a href="/login">Kirjaudu sisään</a>
+Et ole kirjautunut sisään. <a href="/login">Kirjaudu sisään</a> tai <a href="/register">luo uusi profiili</a>.
 {% endif %}
 
-<p>
+<hr>
 
 <h3>Kategoriat:</h3>
 
@@ -59,7 +57,7 @@ Et ole kirjautunut sisään. <a href="/login">Kirjaudu sisään</a>
 </ul>
 {% endif %}
 
-<p>
+<hr>
 
 {% if session.user_id %}
 <a href="/logout">Kirjaudu ulos</a>
