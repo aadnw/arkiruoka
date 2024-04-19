@@ -7,7 +7,14 @@
 
 {% if session.user_id and session.user_role == 1 %}
 Ihanaa nähdä sinua taas! Mukavia kokkaushetkiä <b>{{ session.user_name }}</b> &#129392; <br>
-<a href="/profile/{{ session.user_id }}"><h3>Oma profiili</h3></a>
+
+<nav> <a class="navbar" href="/profile/{{ session.user_id }}"><h3>Oma profiili</h3></a>
+    <a href="/favorites/{{ session.user_id }}">Suosikit</a>
+    <a href="/remove">Poista resepti</a>
+</nav>
+
+<hr>
+
 {% elif session.user_id and session.user_role == 2 %}
 Tervetuloa ylläpitäjä, <b>{{ session.user_name }}.</b>
 {% else %}
