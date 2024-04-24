@@ -12,15 +12,20 @@ def get_my_recipes(user_id):
     return db.session.execute(text(sql), {"user_id":user_id}).fetchall()
 
 def get_recipe_info(recipe_id):
-    sql = """SELECT R.name, U.username, R.time, R.ingredients, R.instructions, R.creator_id, R.visible
+    sql = """SELECT R.name, U.username, R.time, R.ingredients, R.instructions,
+            R.creator_id, R.visible
             FROM recipes R, users U WHERE
             R.id=:recipe_id AND R.creator_id=U.id AND R.visible=1"""
     return db.session.execute(text(sql), {"recipe_id":recipe_id}).fetchone()
 
 def new_recipe(name, time, ingredients, instructions, creator_id, category_id):
-    sql = """INSERT INTO recipes (creator_id, category_id, name, time, ingredients, instructions, created_at, visible)
-            VALUES (:creator_id, :category_id, :name, :time, :ingredients, :instructions, NOW(), 1) RETURNING id"""
-    recipe_id = db.session.execute(text(sql), {"creator_id":creator_id, "category_id":category_id, "name":name, "time":time, "ingredients":ingredients, "instructions":instructions}).fetchone()[0]
+    sql = """INSERT INTO recipes (creator_id, category_id, name, time, ingredients, 
+            instructions, created_at, visible)
+            VALUES (:creator_id, :category_id, :name, :time, :ingredients, :instructions, 
+            NOW(), 1) RETURNING id"""
+    recipe_id = db.session.execute(text(sql), {"creator_id":creator_id, "category_id":category_id, 
+                                               "name":name, "time":time, "ingredients":ingredients, 
+                                               "instructions":instructions}).fetchone()[0]
     db.session.commit()
     return recipe_id
 
@@ -54,7 +59,8 @@ def new_category(name):
     return category_id
 
 def categories_for_removal():
-    sql = "SELECT id, name FROM categories WHERE visible=1 AND id!=1 AND id!=2 AND id!=3 ORDER BY name"
+    sql = """SELECT id, name FROM categories WHERE visible=1 AND id!=1 AND id!=2 AND id!=3 
+            ORDER BY name"""
     return db.session.execute(text(sql)).fetchall()
 
 def remove_category(category_id):
@@ -69,7 +75,8 @@ def remove_category(category_id):
 def add_review(recipe_id, user_id, stars, comment):
     sql = """INSERT INTO reviews (recipe_id, user_id, stars, comment)
             VALUES (:recipe_id, :user_id, :stars, :comment)"""
-    review_id = db.session.execute(text(sql), {"recipe_id":recipe_id, "user_id":user_id, "stars":stars, "comment":comment})
+    review_id = db.session.execute(text(sql), {"recipe_id":recipe_id, "user_id":user_id, 
+                                               "stars":stars, "comment":comment})
     db.session.commit()
     return review_id
 
@@ -79,7 +86,8 @@ def get_reviews(recipe_id):
     return db.session.execute(text(sql), {"recipe_id":recipe_id}).fetchall()
 
 def result(query):
-    sql = "SELECT id, name FROM recipes WHERE visible=1 AND name LIKE :query OR visible=1 AND ingredients LIKE :query OR visible=1 AND instructions LIKE :query"
+    sql = """SELECT id, name FROM recipes WHERE visible=1 AND name LIKE :query 
+            OR visible=1 AND ingredients LIKE :query OR visible=1 AND instructions LIKE :query"""
     return db.session.execute(text(sql), {"query":"%"+query+"%"}).fetchall()
 
 def add_favorite(recipe_id, user_id):
