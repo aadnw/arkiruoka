@@ -217,7 +217,7 @@ def register():
     
     if request.method == "POST":
         username = request.form["username"]
-        if len(username) < 5 or len(username) > 20:
+        if len(username) < 1 or len(username) > 20:
             return render_template("error.html", message="Käyttäjätunnuksessa tulee olle 1-20 merkkiä", adress="/register")
         
         password1 = request.form["password1"]
