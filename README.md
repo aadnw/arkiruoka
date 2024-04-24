@@ -3,7 +3,7 @@ Sovelluksessa näkyy erilaisia ruokakategorioita kuten kasvisruuat, vegaaniset, 
 
 Sovelluksen ominaisuuksia:
 * Käyttäjä voi kirjautua sisään ja ulos sekä luoda uuden tunnuksen.
-* Käyttäjä näkee sovelluksen etusivulla listan kategorioista, sekä top 3 reseptit arvostelujen mukaan.
+* Käyttäjä näkee sovelluksen etusivulla kuvauksen sovelluksesta sekä top 3 reseptit arvostelujen mukaan.
 * Käyttäjä voi luoda kategoriaan uuden reseptin antamalla reseptille nimen ja kirjoittamalla ainekset, ohjeen sekä valmistusajan.
 * Käyttäjä voi poistaa luomansa reseptin.
 * Käyttäjä voi antaa arvion (tähdet ja kommentti) reseptistä ja lukea muiden antamia arvioita.
