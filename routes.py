@@ -28,7 +28,7 @@ def create_recipe():
         return render_template("error.html", message="Nimi on liian pitkä", adress="/new"+str(category_id))
     
     time = request.form["time"]
-    if time < 1:
+    if not time:
         return render_template("error.html", message="Et asettanut reseptille valmistusaikaa", adress="/new"+str(category_id))
 
     ingredients = request.form["ingredients"].replace('\n', '<br>')
