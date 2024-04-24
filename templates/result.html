@@ -1,4 +1,5 @@
 {% extends "layout.html" %}
+{% block title %}Hakutulokset{% endblock %}
 {% block content %}
 
 <h3>Hakutulokset:</h3>
@@ -11,9 +12,5 @@ Hakusanallasi ei löytynyt tuloksia.
 <li> <a href="/recipe/{{ result.id }}">{{ result.name }}</a> <br>
 </ul>
 {% endfor %}
-
-<p>
-
-<a href="/">Palaa takaisin etusivulle</a>
 
 {% endblock %}

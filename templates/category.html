@@ -1,4 +1,5 @@
 {% extends "layout.html" %}
+{% block title %}{{ name }}{% endblock %}
 {% block content %}
 
 <h2>{{ name }}</h2>
@@ -17,7 +18,5 @@ Kategoriassa ei ole vielä reseptejä.
 {% if session.user_role == 1 %}
 <a href="/new/{{ id }}">Lisää uusi resepti</a>
 {% endif %}
-<p>
-<a href="/">Palaa takaisin etusivulle</a>
 
 {% endblock %}

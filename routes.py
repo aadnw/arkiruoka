@@ -5,9 +5,13 @@ import users
 
 @app.route("/")
 def index():
-    list = recipes.get_categories()
     top_recipes = recipes.get_top_recipes()
     return render_template("index.html", categories=list, tops=top_recipes)
+
+@app.route("/categories")
+def categories():
+    list = recipes.get_categories()
+    return render_template("categories.html", categories=list)
 
 @app.route("/new/<int:category_id>")
 def new(category_id):

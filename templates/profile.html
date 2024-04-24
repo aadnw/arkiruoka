@@ -1,7 +1,10 @@
 {% extends "layout.html" %}
+{% block title %}Profile{% endblock %}
 {% block content %}
 
 <h2>{{ session.user_name }}</h2>
+
+{% if session.user_role == 1 %}
 
 {% if not recipes %}
 Sinulla ei ole reseptejä Arkikarkeloissa, <br>
@@ -29,10 +32,17 @@ palaa takaisin <a href="/">etusivulle</a> päästäksesi alkuun! <br>
 
 <p>
 <a href="/favorites/{{ session.user_id }}"><h3>Suosikit</h3></a>
-<p>
 
-{% if recipes %}
-<a href="/">Palaa takaisin etusivulle</a>
+{% endif %}
+
+{% if session.user_role == 2 %}
+
+<ul>
+    <li> <a href="/remove_cat">Poista kategoria</a>
+    <li> <a href="/new_cat">Lisää uusi kategoria</a>
+    <li> <a href="/admin_remove">Hallinnoi reseptejä</a>
+</ul>
+
 {% endif %}
 
 {% endblock %}

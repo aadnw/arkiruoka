@@ -1,7 +1,20 @@
 <!doctype html>
 <link rel="stylesheet" href="main.css">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Arkikarkelot</title>
+<title>{% block title %}Arkikarkelot{% endblock %}</title>
 <h1><b>ARKIKARKELOT</b></h1>
+<div>
+    <a href="/">Etusivu</a>
+    <a href="/categories">Kategoriat</a>
+    {% if session.user_id %}
+    <a href="/profile/{{ session.user_id }}">Oma profiili</a>
+    {% endif %}
+    <form action="/result" method="GET">
+        <h3>Hae reseptiä:</h3> <input type="text" name="query"><input type="submit" value=🔎>
+        <input type="hidden" name="csrf_token" value="{{ session.csrf_token}}">
+    </form>   
+</div>
+
 <hr>
+
 {% block content %}{% endblock %}
