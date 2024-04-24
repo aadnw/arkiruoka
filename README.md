@@ -12,28 +12,40 @@ Sovelluksen ominaisuuksia:
 * Ylläpitäjä voi lisätä ja poistaa kategorioita.
 
 # Käynnistysohjeet:
-Kloonaa tämä repositorio omalle koneellesi ja siirry sen juurikansioon. Luo kansioon .env-tiedosto ja määritä sen sisältö seuraavanlaiseksi:
-
-DATABASE_URL=postgresql:///käyttäjänimi
-
+Kloonaa tämä repositorio omalle koneellesi ja siirry sen juurikansioon. Jos haluat luoda uuden tietokannan tätä sovellusta varten, tee seuraavat komennot:
+``
+$ psql
+``
+``
+user=# CREATE DATABASE uusidb;
+``
+Luo kansioon .env-tiedosto ja määritä sen sisältö seuraavanlaiseksi:
+``
+DATABASE_URL=postgresql:///uusidb
+``
+``
 SECRET_KEY=salainen-avain
-
+``
 (salaisen avaimen voit luoda Pythonilla esim. alla olevalla tavalla, joka tulostaa 16 merkkisen salaisen avaimen):
-
-import secrets
-
-secrets.token_hex(16)
-
+``
+$ python3
+``
+``
+>>> import secrets
+>>> secrets.token_hex(16)
+``
 Seuraavaksi aktivoi virtuaaliympäristö ja asenna sovelluksen riippuvuudet komennoilla:
-
+```
 $ python3 -m venv venv
-
 $ source venv/bin/activate
-
-$ pip install -r ./requirements.txt
-
-$ psql < schema.sql
-
+(venv) $ pip install -r ./requirements.txt
+(venv) $ psql < schema.sql
+```
+TAI jos loit uuden tietokannan niin
+``
+(venv) $ psql -d uusinimi < schema.sql
+``
 Käynnistä sovellus komennolla 
-
-$ flask run
+``
+(venv) $ flask run
+``
