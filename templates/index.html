@@ -3,7 +3,30 @@
 {% block content %}
 
 <h3>Etusivu</h3>
+
 <p>
+
+Arkikarkelot on luotu tekemään juuri <i>sinun</i> arjesta juhlaa!
+Inspiroidu kasvispainotteisesta ruoanlaitosta ja loihdi mitä ihanimmat
+arkiruoat pöytääsi käyttäjiemme luomien reseptien avulla. 
+Anna myös omasta padastasi ja tallenna suosikkireseptisi muiden kokattavaksi.
+<br>
+Arkikarkelot alkakoon, vatsa ja ympäristö kiittää!
+<br>
+
+<hr>
+
+{% if tops %}
+<h3>Top 3 reseptit:</h3>
+
+<ol>
+{% for top in tops %}
+<li><a href="/recipe/{{ top.recipe_id }}">{{ top.name }}</a>
+{% endfor %}
+</ol>
+
+<hr>
+{% endif %}
 
 {% if session.user_id and session.user_role == 1 %}
 Ihanaa nähdä sinua taas! Mukavia kokkaushetkiä <b>{{ session.user_name }}</b> &#129392; <br>
@@ -15,16 +38,6 @@ Et ole kirjautunut sisään. <a href="/login">Kirjaudu sisään</a> tai <a href=
 {% endif %}
 
 <p>
-
-{% if tops %}
-<h3>Top 3 reseptit:</h3>
-
-<ol>
-{% for top in tops %}
-<li><a href="/recipe/{{ top.recipe_id }}">{{ top.name }}</a>
-{% endfor %}
-</ol>
-{% endif %}
 
 {% if session.user_id %}
 <a href="/logout">Kirjaudu ulos</a>
