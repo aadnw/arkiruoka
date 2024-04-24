@@ -3,6 +3,11 @@
 
 <h2>Poista kategoria</h2>
 
+{% if not list %}
+Ei poistettavia kategorioita.
+{% endif %}
+
+{% if list %}
 <form action="/remove_cat" method="POST">
 
 <p>Minkä kategorian haluat poistaa?</p>
@@ -20,6 +25,7 @@
 <input type="hidden" name="csrf_token" value="{{ session.csrf_token}}">
 
 </form>
+{% endif %}
 
 <p>
 <a href="/">Palaa takaisin etusivulle</a>
