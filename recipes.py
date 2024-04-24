@@ -62,6 +62,10 @@ def remove_category(category_id):
     db.session.execute(text(sql), {"id":category_id})
     db.session.commit()
 
+    sql = "UPDATE recipes SET visible=0 WHERE category_id=:category_id"
+    db.session.execute(text(sql), {"category_id":category_id})
+    db.session.commit()
+
 def add_review(recipe_id, user_id, stars, comment):
     sql = """INSERT INTO reviews (recipe_id, user_id, stars, comment)
             VALUES (:recipe_id, :user_id, :stars, :comment)"""
