@@ -1,20 +1,42 @@
 <!doctype html>
-<link rel="stylesheet" href="main.css">
+<html>
+<link rel="stylesheet" href="/static/main.css">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{% block title %}Arkikarkelot{% endblock %}</title>
-<h1><b>ARKIKARKELOT</b></h1>
-<div>
-    <a href="/">Etusivu</a>
-    <a href="/categories">Kategoriat</a>
-    {% if session.user_id %}
-    <a href="/profile/{{ session.user_id }}">Oma profiili</a>
-    {% endif %}
-    <form action="/result" method="GET">
-        <h3>Hae reseptiä:</h3> <input type="text" name="query"><input type="submit" value=🔎>
+
+<div class="left-sidebar-grid">
+    <header class="header"><h1><b>ARKIKARKELOT</b></h1></header>
+    <main class="main-content">{% block content %}{% endblock %}</main>
+    <nav class="navbar">
+        🍓 <a href="/">Etusivu</a> <br>
+        🥦 <a href="/categories">Kategoriat</a> <br>
+        {% if session.user_id %}
+        🍋 <a href="/profile/{{ session.user_id }}">Oma profiili</a> <br>
+        {% endif %}
+        <p>
+        <form action="/result" method="GET">
+        Hae reseptiä: <br>
+        <input type="text" name="query"><input type="submit" value=🔎>
         <input type="hidden" name="csrf_token" value="{{ session.csrf_token}}">
-    </form>   
+        </form>   
+    </nav>
+    <footer class="footer">
+        {% if session.user_id and session.user_role == 1 %}
+        Ihanaa nähdä sinua taas! Mukavia kokkaushetkiä <b>{{ session.user_name }}</b> &#129392; <br>
+
+        {% elif session.user_id and session.user_role == 2 %}
+        Tervetuloa ylläpitäjä, <b>{{ session.user_name }}.</b>
+
+        {% else %}
+        Et ole kirjautunut sisään. <a href="/login">Kirjaudu sisään</a> tai <a href="/register">luo uusi profiili</a>.
+        {% endif %}
+
+        <br>
+
+        {% if session.user_id %}
+        <a href="/logout">Kirjaudu ulos</a>
+        {% endif %}
+    </footer>
 </div>
 
-<hr>
-
-{% block content %}{% endblock %}
+</html>

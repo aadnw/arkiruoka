@@ -28,19 +28,4 @@ Arkikarkelot alkakoon, vatsa ja ympäristö kiittää!
 <hr>
 {% endif %}
 
-{% if session.user_id and session.user_role == 1 %}
-Ihanaa nähdä sinua taas! Mukavia kokkaushetkiä <b>{{ session.user_name }}</b> &#129392; <br>
-
-{% elif session.user_id and session.user_role == 2 %}
-Tervetuloa ylläpitäjä, <b>{{ session.user_name }}.</b>
-{% else %}
-Et ole kirjautunut sisään. <a href="/login">Kirjaudu sisään</a> tai <a href="/register">luo uusi profiili</a>.
-{% endif %}
-
-<p>
-
-{% if session.user_id %}
-<a href="/logout">Kirjaudu ulos</a>
-{% endif %}
-
 {% endblock %}

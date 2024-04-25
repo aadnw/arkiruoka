@@ -1,0 +1,48 @@
+.left-sidebar-grid {
+    display: grid;
+    grid-template-areas:
+        'header'
+        'main-content'
+        'navbar'
+        'footer';
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-areas:
+        'header header header header'
+        'navbar main-content main-content main-content'
+        'footer footer footer footer';
+}
+
+.left-sidebar-grid > * {
+    padding: 5.5rem;
+    line-height: 1.5;
+    font-family: Consolas, monaco, monospace;
+}
+
+.left-sidebar-grid > .header {
+    grid-area: header;
+    text-align: center;
+    padding: 2rem;
+    font-size: 2em;
+    background:#f97171;
+}
+
+.left-sidebar-grid > .main-content {
+    grid-area: main-content;
+    background:#fff;
+}
+
+.left-sidebar-grid > .navbar {
+    grid-area: navbar;
+    text-align: left;
+    font-size: 1.5em;
+    line-height: 2;
+    padding-left: 1em;
+    padding-bottom: 2em;
+    background:#f5d55f;
+}
+
+.left-sidebar-grid > .footer {
+    grid-area: footer;
+    text-align: center;
+    background:#72c2f1;
+}
