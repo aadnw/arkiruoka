@@ -1,11 +1,13 @@
 .left-sidebar-grid {
     display: grid;
+    flex-direction: column;
+    min-height: 100vh;
     grid-template-areas:
         'header'
         'main-content'
         'navbar'
         'footer';
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
     grid-template-areas:
         'header header header header'
         'navbar main-content main-content main-content'
@@ -21,28 +23,39 @@
 .left-sidebar-grid > .header {
     grid-area: header;
     text-align: center;
+    flex-shrink: 0;
     padding: 2rem;
     font-size: 2em;
+    overflow-y: hidden;
     background:#f97171;
 }
 
 .left-sidebar-grid > .main-content {
     grid-area: main-content;
+    max-height: 350px;
+    flex-grow: 1;
+    overflow-y: auto;
     background:#fff;
 }
 
 .left-sidebar-grid > .navbar {
     grid-area: navbar;
-    text-align: left;
+    text-align: center;
+    min-height: 400px;
+    position: -webkit-sticky;
+    position: sticky;
     font-size: 1.5em;
     line-height: 2;
     padding-left: 1em;
     padding-bottom: 2em;
+    overflow-y: hidden;
     background:#f5d55f;
 }
 
 .left-sidebar-grid > .footer {
     grid-area: footer;
+    margin-top: auto;
     text-align: center;
+    overflow-y: hidden;
     background:#72c2f1;
 }
