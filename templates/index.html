@@ -17,11 +17,11 @@ Arkikarkelot alkakoon, vatsa ja ympäristö kiittää!
 <hr>
 
 {% if tops %}
-<h3>Top 3 reseptit:</h3>
+<h3>Top 3 reseptit: 😋</h3>
 
 <ol>
 {% for top in tops %}
-<li><a href="/recipe/{{ top.recipe_id }}">{{ top.name }}</a>
+<li><a style="text-decoration:none" href="/recipe/{{ top.recipe_id }}">{{ top.name }}</a>
 {% endfor %}
 </ol>
 

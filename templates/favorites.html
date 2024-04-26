@@ -10,7 +10,7 @@ Sinulla ei ole vielä suosikkeja.
 
 <ul>
 {% for favorite in favorites %}
-<li><a href="/recipe/{{ favorite.id }}">{{ favorite.name }}</a>
+<li><a style="text-decoration:none" href="/recipe/{{ favorite.id }}">{{ favorite.name }}</a>
 {% endfor %}
 </ul>
 

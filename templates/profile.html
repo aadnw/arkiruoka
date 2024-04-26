@@ -2,7 +2,9 @@
 {% block title %}Profile{% endblock %}
 {% block content %}
 
-<h2>{{ session.user_name }}</h2>
+<h2><u>{{ session.user_name }}</u></h2>
+
+<p>
 
 {% if session.user_role == 1 %}
 
@@ -14,10 +16,9 @@ palaa takaisin <a href="/">etusivulle</a> päästäksesi alkuun! <br>
 <p>
 
 {% if recipes %}
-<b>Omat reseptit:</b> <br>
-<ul>
+<h3>Omat reseptit:</h3>
 {% for recipe in recipes %}
-<li><a href="/recipe/{{ recipe.id}}">{{ recipe.name }}</a> <br>
+<li><a style="text-decoration:none" href="/recipe/{{ recipe.id}}">{{ recipe.name }}</a> <br>
     Luotu: {{ recipe.created_at.strftime("%Y-%m-%d %H:%M:%S") }} <br>
 </li>
 {% endfor %}
@@ -27,20 +28,20 @@ palaa takaisin <a href="/">etusivulle</a> päästäksesi alkuun! <br>
 <p>
 
 {% if recipes %}
-<a href="/remove"><b>Poista resepti</b></a>
+<a style="text-decoration:none" href="/remove"><h3>❌ Poista resepti</h3></a>
 {% endif %}
 
 <p>
-<a href="/favorites/{{ session.user_id }}"><h3>Suosikit</h3></a>
+<a style="text-decoration:none" href="/favorites/{{ session.user_id }}"><h3>💖 Suosikit</h3></a>
 
 {% endif %}
 
 {% if session.user_role == 2 %}
 
 <ul>
-    <li> <a href="/remove_cat">Poista kategoria</a>
-    <li> <a href="/new_cat">Lisää uusi kategoria</a>
-    <li> <a href="/admin_remove">Hallinnoi reseptejä</a>
+    <li> <a style="text-decoration:none" href="/remove_cat">Poista kategoria</a>
+    <li> <a style="text-decoration:none" href="/new_cat">Lisää uusi kategoria</a>
+    <li> <a style="text-decoration:none" href="/admin_remove">Hallinnoi reseptejä</a>
 </ul>
 
 {% endif %}

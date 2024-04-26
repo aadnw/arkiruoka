@@ -8,10 +8,10 @@
     <header class="header"><h1><b>ARKIKARKELOT</b></h1></header>
     <main class="main-content">{% block content %}{% endblock %}</main>
     <nav class="navbar">
-        🍓 <a href="/">Etusivu</a> <br>
-        🥦 <a href="/categories">Kategoriat</a> <br>
+        🍓 <a style="text-decoration:none" href="/">Etusivu</a> <br>
+        🥦 <a style="text-decoration:none" href="/categories">Kategoriat</a> <br>
         {% if session.user_id %}
-        🍋 <a href="/profile/{{ session.user_id }}">Oma profiili</a> <br>
+        🍋 <a style="text-decoration:none" href="/profile/{{ session.user_id }}">Oma profiili</a> <br>
         {% endif %}
         <p>
         <form action="/result" method="GET">
