@@ -1,5 +1,6 @@
 .left-sidebar-grid {
     display: grid;
+    background-color: #d5ff9c;
     flex-direction: column;
     min-height: 100vh;
     grid-template-areas:
@@ -27,7 +28,8 @@
     padding: 2rem;
     font-size: 2em;
     overflow-y: hidden;
-    background:#f97171;
+    color: #ff9cc7;
+    background: #ff3333;
 }
 
 .left-sidebar-grid > .main-content {
@@ -35,7 +37,8 @@
     max-height: 350px;
     flex-grow: 1;
     overflow-y: auto;
-    background:#fff;
+    color: #ff3333;
+    background: #d5ff9c;
 }
 
 .left-sidebar-grid > .navbar {
@@ -49,7 +52,8 @@
     padding-left: 1em;
     padding-bottom: 2em;
     overflow-y: hidden;
-    background:#f5d55f;
+    color: #ff3333;
+    background:#ff9cc7;
 }
 
 .left-sidebar-grid > .footer {
@@ -57,5 +61,66 @@
     margin-top: auto;
     text-align: center;
     overflow-y: hidden;
-    background:#72c2f1;
+    color: #d5ff9c;
+    background: #ff3333;
+}
+
+.red-link:link {
+    color: #ff3333;
+    text-decoration: none;
+}
+
+.red-link:visited {
+    color: #ff3333;
+    text-decoration: none;
+}
+
+.red-link:hover {
+    color: #ff3333;
+    text-decoration: underline;
+}
+
+.footer-link:link {
+    color: #d5ff9c;
+    text-decoration: underline;
+}
+
+.footer-link:visited {
+    color: #d5ff9c;
+    text-decoration: underline;
+}
+
+.footer-link:hover {
+    color: #d5ff9c;
+    text-decoration: none;
+}
+
+.main-link:link {
+    color: #ff3333;
+    text-decoration: none;
+}
+
+.main-link:visited {
+    color: #ff3333;
+    text-decoration: none;
+}
+
+.main-link:hover {
+    color: #ff3333;
+    text-decoration: underline;
+}
+
+.main-u-link:link {
+    color: #ff3333;
+    text-decoration: underline;
+}
+
+.main-u-link:visited {
+    color: #ff3333;
+    text-decoration: underline;
+}
+
+.main-u-link:hover {
+    color: #ff3333;
+    text-decoration: none;
 }

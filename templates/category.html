@@ -11,12 +11,12 @@ Kategoriassa ei ole vielä reseptejä.
 
 <ul>
 {% for recipe in recipes %}
-<li><a style="text-decoration:none" href="/recipe/{{ recipe.id }}">{{ recipe.name }}</a>
+<li><a class="main-link" href="/recipe/{{ recipe.id }}">{{ recipe.name }}</a>
 {% endfor %}
 </ul>
 
 {% if session.user_role == 1 %}
-<a href="/new/{{ id }}">Lisää uusi resepti</a>
+<a class="main-u-link" href="/new/{{ id }}">Lisää uusi resepti</a>
 {% endif %}
 
 {% endblock %}

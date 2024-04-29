@@ -8,10 +8,10 @@
     <header class="header"><h1><b>ARKIKARKELOT</b></h1></header>
     <main class="main-content">{% block content %}{% endblock %}</main>
     <nav class="navbar">
-        🍓 <a style="text-decoration:none" href="/">Etusivu</a> <br>
-        🥦 <a style="text-decoration:none" href="/categories">Kategoriat</a> <br>
+        🍓 <a class="red-link" href="/">Etusivu</a> <br>
+        🥦 <a class="red-link" href="/categories">Kategoriat</a> <br>
         {% if session.user_id %}
-        🍋 <a style="text-decoration:none" href="/profile/{{ session.user_id }}">Oma profiili</a> <br>
+        🍋 <a class="red-link" href="/profile/{{ session.user_id }}">Oma profiili</a> <br>
         {% endif %}
         <p>
         <form action="/result" method="GET">
@@ -28,13 +28,13 @@
         Tervetuloa ylläpitäjä, <b>{{ session.user_name }}.</b>
 
         {% else %}
-        Et ole kirjautunut sisään. <a href="/login">Kirjaudu sisään</a> tai <a href="/register">luo uusi profiili</a>.
+        Et ole kirjautunut sisään. <a class="footer-link" href="/login">Kirjaudu sisään</a> tai <a class="footer-link" href="/register">luo uusi profiili</a>.
         {% endif %}
 
         <br>
 
         {% if session.user_id %}
-        <a href="/logout">Kirjaudu ulos</a>
+        <a class="footer-link" href="/logout">Kirjaudu ulos</a>
         {% endif %}
     </footer>
 </div>
