@@ -18,7 +18,7 @@ palaa takaisin <a href="/">etusivulle</a> päästäksesi alkuun! <br>
 {% if recipes %}
 <h3>Omat reseptit:</h3>
 {% for recipe in recipes %}
-<li><a class="main-link" href="/recipe/{{ recipe.id}}">{{ recipe.name }}</a> <br>
+<li><a class="main-link" href="/recipe/{{ recipe.id}}"><b>{{ recipe.name }}</b></a> <br>
     Luotu: {{ recipe.created_at.strftime("%Y-%m-%d %H:%M:%S") }} <br>
 </li>
 {% endfor %}
@@ -28,11 +28,11 @@ palaa takaisin <a href="/">etusivulle</a> päästäksesi alkuun! <br>
 <p>
 
 {% if recipes %}
-<a class="main-u-link" href="/remove"><h3>❌ Poista resepti</h3></a>
+<a class="red-link" href="/remove"><h3>❌ Poista resepti</h3></a>
 {% endif %}
 
 <p>
-<a class="main-u-link" href="/favorites/{{ session.user_id }}"><h3>💖 Suosikit</h3></a>
+<a class="red-link" href="/favorites/{{ session.user_id }}"><h3>💖 Suosikit</h3></a>
 
 {% endif %}
 
