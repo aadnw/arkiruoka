@@ -139,6 +139,14 @@ input {
     font-family: Consolas, monaco, monospace;
 }
 
+input:focus {
+    outline: solid #ff3333;
+    border-radius: 4px;
+    background-color: #d5ff9c;
+    color: #ff3333;
+    font-family: Consolas, monaco, monospace;
+}
+
 .nav-input {
     border: 2px solid #ff3333;
     border-radius: 4px;
@@ -146,3 +154,12 @@ input {
     color: #ff3333;
     font-family: Consolas, monaco, monospace;
 }
+
+.nav-input:focus {
+    outline: solid #ff3333;
+    border-radius: 4px;
+    background-color: #ff9cc7;
+    color: #ff3333;
+    font-family: Consolas, monaco, monospace;
+}
+
