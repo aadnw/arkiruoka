@@ -147,6 +147,20 @@ input:focus {
     font-family: Consolas, monaco, monospace;
 }
 
+input[type=radio] {
+    accent-color: #ff3333;
+    border: none;
+    border-radius: none;
+    outline: none;
+}
+
+input[type=radio]:checked {
+    accent-color: #ff3333;
+    border: none;
+    border-radius: none;
+    outline: none;
+}
+
 .nav-input {
     border: 2px solid #ff3333;
     border-radius: 4px;
@@ -162,4 +176,3 @@ input:focus {
     color: #ff3333;
     font-family: Consolas, monaco, monospace;
 }
-
