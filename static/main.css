@@ -124,3 +124,9 @@
     color: #ff3333;
     text-decoration: none;
 }
+
+hr {
+    background-color: #ff3333;
+    height: 1px;
+    border: 0;
+}
