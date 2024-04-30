@@ -176,3 +176,19 @@ input[type=radio]:checked {
     color: #ff3333;
     font-family: Consolas, monaco, monospace;
 }
+
+textarea {
+    border: 2px solid #ff3333;
+    border-radius: 4px;
+    background-color: #d5ff9c;
+    color: #ff3333;
+    font-family: Consolas, monaco, monospace;
+}
+
+textarea:focus {
+    outline: solid #ff3333;
+    border-radius: 4px;
+    background-color: #d5ff9c;
+    color: #ff3333;
+    font-family: Consolas, monaco, monospace;
+}
